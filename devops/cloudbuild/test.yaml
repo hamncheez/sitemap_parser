@@ -1,0 +1,13 @@
+# Use this config to test your Pull Requests without pushing Docker images
+steps:
+  # _APP_NAME needs to be defined in the build trigger
+  - name: 'gcr.io/cloud-builders/docker'
+    id: Build
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/$_APP_NAME:$SHORT_SHA'
+      - '.'
+    timeout: 600s
+
+tags: [$_APP_NAME]
